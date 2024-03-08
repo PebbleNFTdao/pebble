@@ -1,0 +1,19 @@
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.json
+lib/**/*.js.map
+lib/**/*.json
+
+# TypeScript v1 declaration files
+typings/
+
+# Node.js dependency directory
+node_modules/
+
+# Images
+images
+
+# env
+.env.*
+!.env.example
+env.json
