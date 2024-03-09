@@ -3,6 +3,7 @@ import { meta } from "@/config/meta";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
+import Footer from "./footer";
 
 export default function RootLayout() {
   return (
@@ -11,7 +12,7 @@ export default function RootLayout() {
         <title>{meta.convert.title}</title>
         <meta name="description" content={meta.convert.description} />
       </Helmet>
-      <div className="flex-col flex">
+      <div className="flex-col flex min-h-screen">
         <header className="border-b">
           <div className="flex h-16 items-center px-4">
             <MainNav className="md:mx-6" />
@@ -22,6 +23,7 @@ export default function RootLayout() {
             <Outlet />
           </div>
         </main>
+        <Footer />
       </div>
       <Toaster richColors />
     </HelmetProvider>
