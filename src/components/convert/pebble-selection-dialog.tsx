@@ -1,4 +1,3 @@
-import { trpc } from "@/client/trpc";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,7 +8,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useBurn } from "@/hooks/convert";
-import { extractAndSetAttributes, sortColleciton } from "@/lib/helpers";
+import { trpc } from "@/lib/trpc";
+import { extractAndSetAttributes, sortColleciton } from "@/lib/utils";
 import { useBurnStore } from "@/stores/burn";
 import {
   useCallback,

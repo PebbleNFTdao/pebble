@@ -1,4 +1,4 @@
-import { APP_TITLE } from "@/config";
+import { APP_TITLE } from "@/constants";
 import { usePath } from "@/hooks/path";
 import { cn } from "@/lib/utils";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -51,7 +51,7 @@ export default function MainNav({
           </NavLink>
         </div>
       </div>
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center">
         <ConnectButton
           accountStatus={{
             smallScreen: "avatar",

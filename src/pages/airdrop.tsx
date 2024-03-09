@@ -1,5 +1,5 @@
 import ReferralLink from "@/components/airdrop/referral-link";
-import { meta } from "@/config/meta";
+import { META, PBLO_SYMBOL } from "@/constants";
 import { useUserRequest } from "@/hooks/user";
 import { Helmet } from "react-helmet-async";
 import AccordionSection from "../components/airdrop/accordion-section";
@@ -11,8 +11,8 @@ export function Component() {
   return (
     <>
       <Helmet>
-        <title>{meta.airdrop.title}</title>
-        <meta name="description" content={meta.airdrop.description} />
+        <title>{META.airdrop.title}</title>
+        <meta name="description" content={META.airdrop.description} />
       </Helmet>
       <div className="max-w-[450px] md:max-w-[600px]">
         <div className="flex py-2 md:py-6 flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0">
@@ -25,13 +25,14 @@ export function Component() {
           />
           <div className="pl-6">
             <h1 className="text-lg md:text-2xl pb-2 text-center md:text-left">
-              $PBLO Airdrop
+              ${PBLO_SYMBOL} Airdrop
             </h1>
             <p className="text-sm md:text-base">
               Pebble NFT awards points daily based on rarity, representing
-              contribution to the Pebble NFT ecosystem and influencing future
-              $PBLO token distribution, a key governance token for the Pebble
-              NFT DAO. High rarity NFT holders can expect additional rewards.
+              contribution to the Pebble NFT ecosystem and influencing future $
+              {PBLO_SYMBOL} token distribution, a key governance token for the
+              Pebble NFT DAO. High rarity NFT holders can expect additional
+              rewards.
             </p>
           </div>
         </div>

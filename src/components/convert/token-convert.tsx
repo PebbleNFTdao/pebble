@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PEBBLE_RATE, STONE_DECIMALS } from "@/config";
-import { TabAction } from "@/enums";
+import { PEBBLE_RATE, STONE_DECIMALS } from "@/constants";
+import { TabActionType } from "@/enums";
 import { useBalance, useMint } from "@/hooks/convert";
 import { QuantitySchema, type QuantitySchemaType } from "@/lib/schema";
 import { useBurnStore } from "@/stores/burn";
@@ -34,7 +34,7 @@ interface Props {
   description: string;
   label: string;
   resultPrefix: string;
-  action: TabAction;
+  action: TabActionType;
   user: RouterOutput["user"]["getMe"] | undefined;
 }
 
@@ -83,7 +83,7 @@ export default function TokenConvert({
 
   const onSubmit: SubmitHandler<QuantitySchemaType> = async ({ quantity }) => {
     try {
-      if (action === TabAction.Crush) {
+      if (action === TabActionType.Crush) {
         const stoneBalance = await fetchStoneBalance();
         const currentAllowanceAmount = await fetchCurrentAllowance();
         const stoneAmount = String(quantity * PEBBLE_RATE);
@@ -145,7 +145,7 @@ export default function TokenConvert({
                 className="text-base mt-1"
                 amount={
                   address
-                    ? action === TabAction.Crush
+                    ? action === TabActionType.Crush
                       ? stoneBalance.toString()
                       : pebbleBalance
                     : undefined

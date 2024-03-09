@@ -1,4 +1,4 @@
-import { trpc } from "@/client/trpc";
+import { trpc } from "@/lib/trpc";
 import { useAccount } from "wagmi";
 import { useQuery } from "./utils";
 

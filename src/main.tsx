@@ -7,7 +7,7 @@ import NotFound from "@/pages/not-found";
 import "@/styles/global.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
 ]);
 
 const container = document.getElementById("root");
-const root = createRoot(container!);
+const root = ReactDOM.createRoot(container!);
 
 root.render(
   <StrictMode>

@@ -1,4 +1,4 @@
-import { initializeTRPCClient, trpc } from "@/client/trpc";
+import { initializeTRPCClient, trpc } from "@/lib/trpc";
 import { wagmiConfig } from "@/lib/wagmi";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
