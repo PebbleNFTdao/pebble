@@ -1,4 +1,4 @@
-export enum TabAction {
+export enum TabActionType {
   Crush = "Crush",
   Restore = "Restore",
 }

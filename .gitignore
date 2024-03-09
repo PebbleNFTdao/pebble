@@ -26,7 +26,11 @@ dist-ssr
 # firebase
 firebase.json
 .firebase
-.firebaserc
+.firebaserc*
 
+# Mac files
+.DS_Store
+
+# Env vars
 .env.*
 !.env.example

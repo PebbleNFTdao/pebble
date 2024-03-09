@@ -1,11 +1,11 @@
 import ERC20 from "@/abi/ERC20.json";
 import PebbleNFT from "@/abi/PebbleNFT.json";
-import { trpc } from "@/client/trpc";
 import {
   PEBBLE_NFT_CONTRACT_ADDRESS,
   STAKE_STONE_ETH_CONTRACT_ADDRESS,
-  STONE_DECIMALS,
 } from "@/config";
+import { STONE_DECIMALS } from "@/constants";
+import { trpc } from "@/lib/trpc";
 import { wagmiConfig } from "@/lib/wagmi";
 import { getClient } from "@wagmi/core";
 import { useState } from "react";

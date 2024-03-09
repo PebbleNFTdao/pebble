@@ -1,12 +1,14 @@
 import InfoImageSection from "@/components/convert/info-image-section";
 import TokenConvert from "@/components/convert/token-convert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabAction } from "@/enums";
+import { TabActionType } from "@/enums";
 import { useUserRequest } from "@/hooks/user";
 import { useState } from "react";
 
+const { Crush, Restore } = TabActionType;
+
 const tabDetails = {
-  [TabAction.Crush]: {
+  [Crush]: {
     title: "Crush StakeStone ETH",
     description: `Pebble NFT makes your StakeStone ETH more enjoyable. By "crushing" your StakedStone ETH, you can convert every 0.05 of it for one Pebble NFT. Each NFT has its own rarity, and the higher the rarity, the more daily point airdrops you'll receive. It's a fun twist to boost your crypto journey.`,
     imageName: "/crush.webp",
@@ -17,7 +19,7 @@ const tabDetails = {
     resultPrefix: "You will deposit",
     altText: "Crush StakeStone ETH",
   },
-  [TabAction.Restore]: {
+  [Restore]: {
     title: "Restore Pebble NFTs",
     description: `Pebble NFT lets you "restore" 1 Pebble NFT back into 0.05 StakedStone ETH. You can wait 2 weeks after "crushing" or use a potion for an instant restore. But be careful when restoring high rarity NFTs – it's a one-way street with no undo button!`,
     imageName: "/restore.webp",
@@ -30,55 +32,53 @@ const tabDetails = {
 };
 
 export default function ConvertPage() {
-  const [tab, setTab] = useState(TabAction.Crush);
+  const [tab, setTab] = useState(Crush);
   const { user } = useUserRequest();
 
   return (
     <>
-      {tab === TabAction.Crush && (
+      {tab === Crush && (
         <InfoImageSection
-          title={tabDetails[TabAction.Crush].title}
-          description={tabDetails[TabAction.Crush].description}
-          imageName={tabDetails[TabAction.Crush].imageName}
-          altText={tabDetails[TabAction.Crush].altText}
+          title={tabDetails[Crush].title}
+          description={tabDetails[Crush].description}
+          imageName={tabDetails[Crush].imageName}
+          altText={tabDetails[Crush].altText}
         />
       )}
-      {tab === TabAction.Restore && (
+      {tab === Restore && (
         <InfoImageSection
-          title={tabDetails[TabAction.Restore].title}
-          description={tabDetails[TabAction.Restore].description}
-          imageName={tabDetails[TabAction.Restore].imageName}
-          altText={tabDetails[TabAction.Restore].altText}
+          title={tabDetails[Restore].title}
+          description={tabDetails[Restore].description}
+          imageName={tabDetails[Restore].imageName}
+          altText={tabDetails[Restore].altText}
         />
       )}
       <Tabs
-        defaultValue={TabAction.Crush}
-        onValueChange={(value) => setTab(value as TabAction)}
+        defaultValue={Crush}
+        onValueChange={(value) => setTab(value as TabActionType)}
         className="md:w-[600px]"
       >
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value={TabAction.Crush}>{TabAction.Crush}</TabsTrigger>
-          <TabsTrigger value={TabAction.Restore}>
-            {TabAction.Restore}
-          </TabsTrigger>
+          <TabsTrigger value={Crush}>{Crush}</TabsTrigger>
+          <TabsTrigger value={Restore}>{Restore}</TabsTrigger>
         </TabsList>
-        <TabsContent value={TabAction.Crush}>
+        <TabsContent value={Crush}>
           <TokenConvert
-            title={tabDetails[TabAction.Crush].operationTitle}
-            description={tabDetails[TabAction.Crush].operationDescription}
-            label={tabDetails[TabAction.Crush].label}
-            resultPrefix={tabDetails[TabAction.Crush].resultPrefix}
-            action={TabAction.Crush}
+            title={tabDetails[Crush].operationTitle}
+            description={tabDetails[Crush].operationDescription}
+            label={tabDetails[Crush].label}
+            resultPrefix={tabDetails[Crush].resultPrefix}
+            action={Crush}
             user={user}
           />
         </TabsContent>
-        <TabsContent value={TabAction.Restore}>
+        <TabsContent value={Restore}>
           <TokenConvert
-            title={tabDetails[TabAction.Restore].operationTitle}
-            description={tabDetails[TabAction.Restore].operationDescription}
-            label={tabDetails[TabAction.Restore].label}
-            resultPrefix={tabDetails[TabAction.Restore].resultPrefix}
-            action={TabAction.Restore}
+            title={tabDetails[Restore].operationTitle}
+            description={tabDetails[Restore].operationDescription}
+            label={tabDetails[Restore].label}
+            resultPrefix={tabDetails[Restore].resultPrefix}
+            action={Restore}
             user={user}
           />
         </TabsContent>

@@ -1,5 +1,5 @@
 import MainNav from "@/components/common/main-nav";
-import { meta } from "@/config/meta";
+import { META } from "@/constants";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -9,8 +9,8 @@ export default function RootLayout() {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{meta.convert.title}</title>
-        <meta name="description" content={meta.convert.description} />
+        <title>{META.convert.title}</title>
+        <meta name="description" content={META.convert.description} />
       </Helmet>
       <div className="flex-col flex min-h-screen">
         <header className="border-b">

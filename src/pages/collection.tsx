@@ -1,4 +1,3 @@
-import { trpc } from "@/client/trpc";
 import {
   CollectionEmptyPrompt,
   CollectionGrid,
@@ -7,9 +6,9 @@ import {
 } from "@/components/collection";
 import Loading from "@/components/common/loading";
 import { Separator } from "@/components/ui/separator";
-import { PEBBLE_RATE } from "@/config";
-import { meta } from "@/config/meta";
-import { extractAndSetAttributes, sortColleciton } from "@/lib/helpers";
+import { META, PEBBLE_RATE } from "@/constants";
+import { trpc } from "@/lib/trpc";
+import { extractAndSetAttributes, sortColleciton } from "@/lib/utils";
 import { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useAccount } from "wagmi";
@@ -35,8 +34,8 @@ export function Component() {
   return (
     <>
       <Helmet>
-        <title>{meta.collection.title}</title>
-        <meta name="description" content={meta.collection.description} />
+        <title>{META.collection.title}</title>
+        <meta name="description" content={META.collection.description} />
       </Helmet>
       <div className="md:block">
         <div className="border-y">

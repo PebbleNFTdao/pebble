@@ -1,6 +1,6 @@
 import MainNav from "@/components/common/main-nav";
 import { Button } from "@/components/ui/button";
-import { meta } from "@/config/meta";
+import { META } from "@/constants";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <>
       <Helmet>
-        <title>{meta.notFound.title}</title>
+        <title>{META.notFound.title}</title>
       </Helmet>
       <div className="flex-col md:flex">
         <div className="border-b">

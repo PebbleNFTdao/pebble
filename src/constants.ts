@@ -1,6 +1,15 @@
-import { APP_DESCRIPTION, APP_TITLE } from "./";
+// App
+export const APP_TITLE = "Pebble";
+export const APP_DESCRIPTION =
+  "Convert your STONE to NFTs for hodling or trading. Elevate your crypto game with our easy-to-use platform.";
+export const PBLO_SYMBOL = "PBLO";
 
-export const meta = {
+// Convert
+export const PEBBLE_RATE = 0.05;
+export const STONE_DECIMALS = 18;
+
+// Meta
+export const META = {
   convert: {
     title: `${APP_TITLE} - Convert`,
     description: APP_DESCRIPTION,
@@ -20,6 +29,8 @@ export const meta = {
   },
 };
 
-export const social = {
+// URLs
+export const MANTA_RPC_URL = "https://pacific-rpc.manta.network/http";
+export const SOCIAL_URLS = {
   github: "https://github.com/PebbleNFTdao",
 };
