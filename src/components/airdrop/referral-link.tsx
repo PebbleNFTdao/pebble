@@ -24,7 +24,7 @@ export default function ReferralLink({ code }: Props) {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="rounded-3xl py-6 px-8 p-5 bg-custom-bg w-full flex gap-5 flex-wrap max-w-3xl">
+      <div className="rounded-3xl py-6 md:px-8 p-5 bg-custom-bg w-full flex gap-5 flex-wrap max-w-3xl">
         <div className="flex flex-grow flex-col text-center">
           <h6 className="mb-3 text-lg">Your Referral Link</h6>
           <span className="text-base mb-6">{referralLink}</span>

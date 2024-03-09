@@ -8,18 +8,18 @@ import { generateRandomCode } from "../utils/helpers";
 import { UserSchema, getMeInput, zodParse } from "../utils/schema";
 
 export const getMe = async ({ address, code }: z.infer<typeof getMeInput>) => {
-  const docRef = userCollection.doc(address);
-  const doc = await docRef.get();
-  if (!doc.exists) {
-    return await initializeUserData(docRef, code);
+  const userRef = userCollection.doc(address);
+  const userDoc = await userRef.get();
+  if (!userDoc.exists) {
+    return await initializeUserData(userRef, code);
   }
-  const data = zodParse({ address, ...doc.data() }, UserSchema);
+  const data = zodParse({ address, ...userDoc.data() }, UserSchema);
   const user = new User(data);
   return user.toJSON();
 };
 
 export const initializeUserData = async (
-  docRef: FirebaseFirestore.DocumentReference,
+  userRef: FirebaseFirestore.DocumentReference,
   code?: string | null
 ) => {
   const referralCode = generateRandomCode();
@@ -47,7 +47,7 @@ export const initializeUserData = async (
           .doc();
 
         t.set(newReferralDocRef, {
-          address: docRef.id,
+          address: userRef.id,
           referredAt: FieldValue.serverTimestamp(),
         });
 
@@ -58,7 +58,7 @@ export const initializeUserData = async (
       }
     }
 
-    t.set(docRef, initialData);
+    t.set(userRef, initialData);
   });
 
   return initialData;
@@ -78,9 +78,11 @@ export const initializeUserInSnapshot = async (
     referralCount: 0,
     createdAt: FieldValue.serverTimestamp(),
   };
-  const ref = userCollection.doc(address);
-  batch.set(ref, initialData);
+  const userRef = userCollection.doc(address);
+  batch.set(userRef, initialData);
 
-  const dailySnapshotRef = ref.collection("dailySnapshot").doc(snapshotDate);
+  const dailySnapshotRef = userRef
+    .collection("dailySnapshot")
+    .doc(snapshotDate);
   batch.set(dailySnapshotRef, { points });
 };
