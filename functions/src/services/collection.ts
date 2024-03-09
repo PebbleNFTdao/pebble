@@ -6,7 +6,7 @@ export const listCollection = async (address: string) => {
   const tokenIds = (await getOwnedTokenIds(address)).map((t) => t.toString());
   const promises = [];
   for (const tokenId of tokenIds) {
-    promises.push(getNFTData(tokenId, false));
+    promises.push(getNFTData(tokenId, false, false));
   }
   const collection = (await Promise.all(promises))
     .filter((t) => t && t.isActive)

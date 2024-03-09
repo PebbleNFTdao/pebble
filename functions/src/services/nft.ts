@@ -109,7 +109,8 @@ const getRandomIndex = (arr: typeof PebbleNFTInfos) => {
 
 export const getNFTData = async (
   tokenId: string,
-  throwErrorIfNotFound: boolean = true
+  throwErrorIfNotFound: boolean = true,
+  throwErrorIfBurned: boolean = true
 ) => {
   const doc = await nftCollection.doc(tokenId).get();
   if (!doc.exists) {
@@ -124,6 +125,12 @@ export const getNFTData = async (
   }
   const data = zodParse({ ...doc.data(), tokenId }, NFTSchema);
   const nft = new NFT(data);
+  if (!nft.isActive && throwErrorIfBurned) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: `NFT with tokenId "${tokenId}" has been burned.`,
+    });
+  }
   return nft;
 };
 
