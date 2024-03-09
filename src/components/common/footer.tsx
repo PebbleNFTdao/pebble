@@ -1,3 +1,4 @@
+import { social } from "@/config/meta";
 import { cn } from "@/lib/utils";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import React from "react";
@@ -15,7 +16,7 @@ export default function Footer({
         <div />
         <div className="flex flex-col lg:flex-row lg:space-x-6 lg:mt-0">
           <a
-            href="https://github.com/PebbleNFTdao"
+            href={social.github}
             className="text-gray-400 text-sm hover:text-primary transition-colors"
             target="_blank"
             rel="noopener noreferrer"

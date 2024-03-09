@@ -19,3 +19,7 @@ export const meta = {
     title: `${APP_TITLE} - NotFound`,
   },
 };
+
+export const social = {
+  github: "https://github.com/PebbleNFTdao",
+};
