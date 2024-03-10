@@ -35,7 +35,7 @@ export default function DailyLoginBonus() {
           />
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-[350px] sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Daily Login Bonus</DialogTitle>
           <DialogDescription>
