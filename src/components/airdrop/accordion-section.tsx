@@ -4,13 +4,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { AppRouter } from "@/types";
-import type { inferRouterOutputs } from "@trpc/server";
-
-type RouterOutput = inferRouterOutputs<AppRouter>;
+import type { User } from "@/types";
 
 interface Props {
-  user: RouterOutput["user"]["getMe"] | undefined;
+  user: User | undefined;
 }
 
 export default function AccordionSection({ user }: Props) {

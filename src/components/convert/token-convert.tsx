@@ -13,21 +13,19 @@ import { PEBBLE_RATE, STONE_DECIMALS } from "@/constants";
 import { TabActionType } from "@/enums";
 import { useBalance, useMint } from "@/hooks/convert";
 import { QuantitySchema, type QuantitySchemaType } from "@/lib/schema";
+import { displayRejectionMessage } from "@/lib/utils";
 import { useBurnStore } from "@/stores/burn";
+import { User } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import type { inferRouterOutputs } from "@trpc/server";
 import { useCallback, useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { parseUnits } from "viem";
 import { useAccount } from "wagmi";
-import type { AppRouter } from "../../../functions/src/app";
 import { StoneIcon } from "../icon/stone";
 import PebbleSelectionDialog from "./pebble-selection-dialog";
-
-type RouterOutput = inferRouterOutputs<AppRouter>;
 
 interface Props {
   title: string;
@@ -35,7 +33,7 @@ interface Props {
   label: string;
   resultPrefix: string;
   action: TabActionType;
-  user: RouterOutput["user"]["getMe"] | undefined;
+  user: User | undefined;
 }
 
 export default function TokenConvert({
@@ -119,8 +117,9 @@ export default function TokenConvert({
       setIsDialogOpen(true);
     } catch (error) {
       toast.error("Error", {
-        description:
-          "An error occurred while processing your request. Please try again later.",
+        description: `${displayRejectionMessage(
+          error as Error
+        )} Please try again later.`,
         position: "top-right",
       });
     }

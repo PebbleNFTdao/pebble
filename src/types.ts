@@ -9,4 +9,7 @@ export interface NFTType {
   rarity: string;
   burnableAt: string;
 }
-export type RouterOutput = inferRouterOutputs<AppRouter>;
+
+type RouterOutput = inferRouterOutputs<AppRouter>;
+export type User = RouterOutput["user"]["getMe"];
+export type Collection = RouterOutput["collection"]["listCollection"];

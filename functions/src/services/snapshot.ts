@@ -1,5 +1,5 @@
 import { FieldValue } from "@google-cloud/firestore";
-import { RARITY_BASE_POINT } from "../config";
+import { RARITY_BASE_POINT } from "../constants";
 import { User } from "../models/user";
 import { getOwnerOf, getTotalSupply } from "../utils/blockchain";
 import { publicClient } from "../utils/client";

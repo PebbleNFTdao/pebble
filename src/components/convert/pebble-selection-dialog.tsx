@@ -9,7 +9,11 @@ import {
 } from "@/components/ui/dialog";
 import { useBurn } from "@/hooks/convert";
 import { trpc } from "@/lib/trpc";
-import { extractAndSetAttributes, sortColleciton } from "@/lib/utils";
+import {
+  displayRejectionMessage,
+  extractAndSetAttributes,
+  sortColleciton,
+} from "@/lib/utils";
 import { useBurnStore } from "@/stores/burn";
 import {
   useCallback,
@@ -60,7 +64,9 @@ export default function PebbleSelectionDialog({
       refetch();
     } catch (error) {
       toast.error("Error", {
-        description: `${(error as Error).message} Please try again later.`,
+        description: `${displayRejectionMessage(
+          error as Error
+        )} Please try again later.`,
         position: "top-right",
       });
     }

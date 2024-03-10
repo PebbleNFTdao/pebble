@@ -1,4 +1,4 @@
-import type { NFTType, RouterOutput } from "@/types";
+import type { Collection, NFTType } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { formatDistance } from "date-fns";
 import { twMerge } from "tailwind-merge";
@@ -7,24 +7,24 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const extractAndSetAttributes = (
-  collection: RouterOutput["collection"]["listCollection"]
-) => {
-  return collection.map((nft) => {
-    const attributes = nft.attributes as Record<string, string>[];
-    const rarityAttribute = attributes.find(
+export const extractAndSetAttributes = (collection: Collection) => {
+  return collection.map((item) => {
+    const nft = { ...item } as unknown as NFTType;
+    const rarityAttribute = item.attributes.find(
       (attribute) => attribute.trait_type === "rarity"
-    );
-    const burnableAtAttribute = attributes.find(
-      (attribute) => attribute.trait_type === "burnableAt"
     );
     if (rarityAttribute) {
       nft.rarity = rarityAttribute.value;
     }
+
+    const burnableAtAttribute = item.attributes.find(
+      (attribute) => attribute.trait_type === "burnableAt"
+    );
     if (burnableAtAttribute) {
       nft.burnableAt = burnableAtAttribute.value;
     }
-    return nft as unknown as NFTType;
+
+    return nft;
   });
 };
 
@@ -42,4 +42,23 @@ export const getRestorability = (burnableAt: string): string => {
     addSuffix: true,
   });
   return `Restorable ${relativeTime}`;
+};
+
+export const isBeforeToday = (date: string) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const compareDate = new Date(date);
+  compareDate.setHours(0, 0, 0, 0);
+  return compareDate < today;
+};
+
+export const displayRejectionMessage = (error: Error) => {
+  const defaultMessage = (error as Error).message;
+  if (
+    error instanceof Error &&
+    error.message.includes("User rejected the request.")
+  ) {
+    return "You rejected the request.";
+  }
+  return defaultMessage;
 };

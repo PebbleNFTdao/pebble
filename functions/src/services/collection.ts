@@ -1,4 +1,4 @@
-import type { NFT } from "../models/nft";
+import { NFT } from "../models/nft";
 import { getOwnedTokenIds } from "../utils/blockchain";
 import { getNFTData } from "./nft";
 
@@ -8,8 +8,6 @@ export const listCollection = async (address: string) => {
   for (const tokenId of tokenIds) {
     promises.push(getNFTData(tokenId, false, false));
   }
-  const collection = (await Promise.all(promises))
-    .filter((t) => t && t.isActive)
-    .map((t) => t?.toJSON());
-  return collection as unknown as NFT[];
+  const collection = await Promise.all(promises);
+  return collection.filter((t) => t && t.isActive) as NFT[];
 };

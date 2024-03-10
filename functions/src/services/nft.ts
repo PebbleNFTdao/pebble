@@ -1,8 +1,9 @@
 import { FieldValue } from "@google-cloud/firestore";
 import { TRPCError } from "@trpc/server";
-import { RANDOM_PROBABILITIES } from "../config";
+import { RANDOM_PROBABILITIES } from "../constants";
 import * as PebbleNFTInfos from "../data/pebble_nft_infos.json";
 import { NFT } from "../models/nft";
+import { User } from "../models/user";
 import { signMessageByOwner } from "../utils/blockchain";
 import { nftCollection, userCollection } from "../utils/db";
 import { db } from "../utils/firebase";
@@ -181,23 +182,23 @@ export const permitBurnNFT = async (address: string, tokenIds: string[]) => {
 };
 
 const checkLastPermitBurnNFTAt = async (address: string) => {
-  const docRef = userCollection.doc(address);
-  const doc = await docRef.get();
-  if (!doc.exists) {
+  const userRef = userCollection.doc(address);
+  const userDoc = await userRef.get();
+  if (!userDoc.exists) {
     throw new TRPCError({
       code: "NOT_FOUND",
       message: "User not found.",
     });
   }
-  const user = zodParse({ address, ...doc.data() }, UserSchema);
+  const data = zodParse({ address, ...userDoc.data() }, UserSchema);
+  const user = new User(data);
   if (!user.lastPermitBurnNFTAt) {
     return true;
   }
 
   const threeMinutes = 1000 * 60 * 3;
   return (
-    user.lastPermitBurnNFTAt.toDate().getTime() + threeMinutes <
-    new Date().getTime()
+    user.lastPermitBurnNFTAt.getTime() + threeMinutes < new Date().getTime()
   );
 };
 

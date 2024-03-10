@@ -2,16 +2,25 @@ import { z } from "zod";
 import { UserSchema } from "../utils/schema";
 import { BaseModel } from "./base";
 
-export class User extends BaseModel {
+export type UserResponse = Omit<User, "privateFields" | "toJSON" | "createdAt">;
+
+export class User extends BaseModel<User> {
   address: string;
   points: number;
   potions: number;
   referralCount: number;
   referralCode: string;
-  createdAt?: Date;
-  lastPermitBurnNFTAt?: Date;
+  createdAt: Date | null;
+  lastPermitBurnNFTAt: Date | null;
+  lastDailyBonusAt: Date | null;
+  dailyBonusCount: number | null;
 
-  privateFields = ["createdAt"];
+  privateFields = [
+    "createdAt",
+    "dailyBonusCount",
+    "lastDailyBonusAt",
+    "lastPermitBurnNFTAt",
+  ];
 
   constructor(userData: z.infer<typeof UserSchema>) {
     super();
@@ -21,6 +30,14 @@ export class User extends BaseModel {
     this.referralCount = userData.referralCount;
     this.referralCode = userData.referralCode;
     this.createdAt = userData.createdAt.toDate();
-    this.lastPermitBurnNFTAt = userData.lastPermitBurnNFTAt;
+    this.lastPermitBurnNFTAt = userData.lastPermitBurnNFTAt
+      ? userData.lastPermitBurnNFTAt.toDate()
+      : null;
+    this.lastDailyBonusAt = userData.lastDailyBonusAt
+      ? userData.lastDailyBonusAt.toDate()
+      : null;
+    this.dailyBonusCount = userData.dailyBonusCount
+      ? userData.dailyBonusCount
+      : null;
   }
 }

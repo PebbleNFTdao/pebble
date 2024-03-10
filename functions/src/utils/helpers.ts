@@ -1,8 +1,8 @@
 import { Timestamp } from "@google-cloud/firestore";
 import * as crypto from "node:crypto";
-import { MAX_AGE_DAYS } from "../config";
+import { MAX_AGE_DAYS } from "../constants";
 
-export const getRandomString = (byteLength: number) => {
+export const generateRandomString = (byteLength: number) => {
   return crypto.randomBytes(byteLength).toString("hex");
 };
 
