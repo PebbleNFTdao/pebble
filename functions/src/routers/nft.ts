@@ -5,7 +5,5 @@ import { publicProcedure, router } from "../utils/trpc";
 export const nftRouter = router({
   permitBurnNFT: publicProcedure
     .input(permitBurnNFTInput)
-    .mutation(({ input }) => {
-      return permitBurnNFT(input.address, input.tokenIds);
-    }),
+    .mutation(({ input }) => permitBurnNFT(input.address, input.tokenIds)),
 });

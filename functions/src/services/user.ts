@@ -1,11 +1,18 @@
 import { FieldValue } from "@google-cloud/firestore";
 import { z } from "zod";
-import { INITIAL_POINT, INITIAL_POTION } from "../config";
+import { INITIAL_POINT, INITIAL_POTION } from "../constants";
 import { User } from "../models/user";
 import { userCollection } from "../utils/db";
 import { db } from "../utils/firebase";
 import { generateRandomCode } from "../utils/helpers";
 import { UserSchema, getMeInput, zodParse } from "../utils/schema";
+
+const INITIAL_USER_DATA = {
+  points: INITIAL_POINT,
+  potions: INITIAL_POTION,
+  referralCount: 0,
+  dailyBonusCount: 0,
+};
 
 export const getMe = async ({ address, code }: z.infer<typeof getMeInput>) => {
   const userRef = userCollection.doc(address);
@@ -15,7 +22,7 @@ export const getMe = async ({ address, code }: z.infer<typeof getMeInput>) => {
   }
   const data = zodParse({ address, ...userDoc.data() }, UserSchema);
   const user = new User(data);
-  return user.toJSON();
+  return user;
 };
 
 export const initializeUserData = async (
@@ -24,10 +31,8 @@ export const initializeUserData = async (
 ) => {
   const referralCode = generateRandomCode();
   const initialData = {
-    points: INITIAL_POINT,
-    potions: INITIAL_POTION,
+    ...INITIAL_USER_DATA,
     referralCode,
-    referralCount: 0,
     createdAt: FieldValue.serverTimestamp(),
   };
 
@@ -61,7 +66,8 @@ export const initializeUserData = async (
     t.set(userRef, initialData);
   });
 
-  return initialData;
+  const user = new User({ ...initialData, address: userRef.id });
+  return user;
 };
 
 export const initializeUserInSnapshot = async (
@@ -72,12 +78,11 @@ export const initializeUserInSnapshot = async (
 ) => {
   const referralCode = generateRandomCode();
   const initialData = {
-    points: points,
-    potions: INITIAL_POTION,
+    ...INITIAL_USER_DATA,
     referralCode,
-    referralCount: 0,
     createdAt: FieldValue.serverTimestamp(),
   };
+
   const userRef = userCollection.doc(address);
   batch.set(userRef, initialData);
 

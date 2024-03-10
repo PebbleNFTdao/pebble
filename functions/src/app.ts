@@ -1,7 +1,8 @@
 import * as trpcExpress from "@trpc/server/adapters/express";
-import { APP_TITLE, APP_VERSION } from "./config";
+import { APP_TITLE, APP_VERSION } from "./constants";
 import { collectionRouter } from "./routers/collection";
 import { nftRouter } from "./routers/nft";
+import { rewardRouter } from "./routers/reward";
 import { userRouter } from "./routers/user";
 import { logger } from "./utils/logger";
 import { publicProcedure, router } from "./utils/trpc";
@@ -13,6 +14,7 @@ export const appRouter = router({
   user: userRouter,
   collection: collectionRouter,
   nft: nftRouter,
+  reward: rewardRouter,
 });
 
 export type AppRouter = typeof appRouter;

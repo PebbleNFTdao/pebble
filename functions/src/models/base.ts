@@ -1,4 +1,4 @@
-export abstract class BaseModel {
+export abstract class BaseModel<T> {
   abstract privateFields: string[];
 
   toJSON() {
@@ -29,6 +29,6 @@ export abstract class BaseModel {
       },
       {}
     );
-    return json;
+    return json as T;
   }
 }

@@ -6,7 +6,7 @@ export const useUserRequest = () => {
   const { address } = useAccount();
   const query = useQuery();
 
-  const { data: user } = trpc.user.getMe.useQuery(
+  const { data: user, isLoading } = trpc.user.getMe.useQuery(
     {
       address: address!,
       ...(query.get("code") && { code: query.get("code") }),
@@ -18,5 +18,6 @@ export const useUserRequest = () => {
 
   return {
     user,
+    loading: isLoading,
   };
 };

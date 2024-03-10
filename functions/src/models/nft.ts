@@ -5,7 +5,9 @@ import type { Attribute } from "../types";
 import { NFTSchema } from "../utils/schema";
 import { BaseModel } from "./base";
 
-export class NFT extends BaseModel {
+export type NFTResponse = Omit<NFT, "privateFields" | "toJSON">;
+
+export class NFT extends BaseModel<NFT> {
   tokenId: string;
   name: string;
   description: string;

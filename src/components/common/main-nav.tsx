@@ -3,6 +3,7 @@ import { usePath } from "@/hooks/path";
 import { cn } from "@/lib/utils";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { NavLink } from "react-router-dom";
+import DailyLoginBonus from "./daily-login-bonus";
 import MobileNav from "./mobile-nav";
 
 export default function MainNav({
@@ -52,6 +53,7 @@ export default function MainNav({
         </div>
       </div>
       <div className="ml-auto flex items-center">
+        <DailyLoginBonus />
         <ConnectButton
           accountStatus={{
             smallScreen: "avatar",

@@ -21,6 +21,8 @@ export const UserSchema = z
     referralCode: z.string().length(6),
     createdAt: z.any(),
     lastPermitBurnNFTAt: z.any().optional(),
+    lastDailyBonusAt: z.any().optional(),
+    dailyBonusCount: z.number().int().min(0).optional(),
   })
   .merge(addressSchema);
 
@@ -48,6 +50,12 @@ export const permitBurnNFTInput = z
     tokenIds: z.array(z.string().regex(/^\d+$/, "Invalid tokenId format")),
   })
   .merge(addressSchema);
+
+export const verifySiweSignatureInput = z.object({
+  signature: z.string().min(1),
+  message: z.any(),
+  nonceToken: z.string().min(1),
+});
 
 export const tokenMetadataParams = z.object({
   0: z.string().regex(/^\d+$/, "Invalid tokenId"),
