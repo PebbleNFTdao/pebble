@@ -15,12 +15,7 @@ export class User extends BaseModel<User> {
   lastDailyBonusAt: Date | null;
   dailyBonusCount: number | null;
 
-  privateFields = [
-    "createdAt",
-    "dailyBonusCount",
-    "lastDailyBonusAt",
-    "lastPermitBurnNFTAt",
-  ];
+  privateFields = ["createdAt", "dailyBonusCount", "lastPermitBurnNFTAt"];
 
   constructor(userData: z.infer<typeof UserSchema>) {
     super();
