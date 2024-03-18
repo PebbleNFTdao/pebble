@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { FaXTwitter } from "react-icons/fa6";
+import { LuBook } from "react-icons/lu";
 
 export default function Footer({
   className,
@@ -31,6 +32,14 @@ export default function Footer({
             rel="noopener noreferrer"
           >
             <GitHubLogoIcon className="w-6 h-6" />
+          </a>
+          <a
+            href={SOCIAL_URLS.gitbook}
+            className="text-gray-400 text-sm hover:text-primary transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LuBook className="w-6 h-6" />
           </a>
         </div>
       </div>
