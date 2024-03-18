@@ -2,6 +2,7 @@ import { SOCIAL_URLS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import React from "react";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer({
   className,
@@ -12,9 +13,17 @@ export default function Footer({
       className={cn("w-full mt-8 p-4 py-6 border-t", className)}
       {...props}
     >
-      <div className="container mx-auto flex flex-col lg:flex-row justify-between items-start md:items-center">
+      <div className="container mx-auto flex flex-col lg:flex-row justify-between items-end md:items-center">
         <div />
-        <div className="flex flex-col lg:flex-row lg:space-x-6 lg:mt-0">
+        <div className="flex flex-row space-x-6 lg:mt-0">
+          <a
+            href={SOCIAL_URLS.x}
+            className="text-gray-400 text-sm hover:text-primary transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaXTwitter className="w-6 h-6" />
+          </a>
           <a
             href={SOCIAL_URLS.github}
             className="text-gray-400 text-sm hover:text-primary transition-colors"

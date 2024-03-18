@@ -33,4 +33,5 @@ export const META = {
 export const MANTA_RPC_URL = "https://pacific-rpc.manta.network/http";
 export const SOCIAL_URLS = {
   github: "https://github.com/PebbleNFTdao",
+  x: "https://twitter.com/pebble_dao",
 };
